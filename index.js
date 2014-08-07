@@ -16,6 +16,12 @@ pastebin.prototype.callAPI = function(options,callback) {
 	if(options.action === 'delete' && options.userKey === undefined) throw new Error('Missing non-optional option: userKey');
 	if(options.action === 'userdetails' && options.userKey === undefined) throw new Error('Missing non-optional option: userKey');
 	
+	if(options.action === "getraw") {
+		if(options.pasteKey === undefined) throw new Error('Missing non-optional option: pasteKey');
+		this.getRawPaste(options,callback);
+		return;
+	}
+	
 	var query = {
 		api_dev_key: this.apiKey,
 		api_option: options.action
